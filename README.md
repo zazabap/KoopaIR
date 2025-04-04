@@ -28,3 +28,24 @@ docker run -it --rm -v /path/to/directory:/root/compiler maxxing/compiler-dev ba
 
 
 <!-- docker run -it --rm -v /Users/shiwenan/Documents/KoopaIR:/root/compiler maxxing/compiler-dev bash -->
+
+
+There are several framework for Koopa IR `koopa` and `libkoopa` both have the library infrastructure, to realize the `Koopa IR`'s generation, analysis and conversion. 
+
+Testing how to run Koopa 
+```
+cd Preview
+koopac hello.koopa | llc --filetype=obj -o hello.o
+clang hello.o -L$CDE_LIBRARY_PATH/native -lsysy -o hello
+./hello
+```
+
+and test how to run the assembly 
+```
+cd Preview 
+clang hello.S -c -o hello.o -target riscv32-unknown-linux-elf -march=rv32im -mabi=ilp32
+ld.lld hello.o -L$CDE_LIBRARY_PATH/riscv32 -lsysy -o hello
+qemu-riscv32-static hello
+```
+
+
